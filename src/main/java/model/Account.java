@@ -1,22 +1,25 @@
 package model;
 
-import org.springframework.data.annotation.Id;
-
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
-@Table(schema = "public",name = "Account")
+@Table(name = "Account", schema = "public")
 public class Account {
 
     @Id
-    String username;
+    @Column(name = "username", nullable = false)
+    private String username;
 
-    String password;
+    @Column(name = "passcode")
+    private String passcode;
 
     public Account(String username, String password) {
         this.username = username;
-        this.password = password;
+        this.passcode = password;
+    }
+
+    public Account() {
+        super();
     }
 
     public String getUsername() {
@@ -27,19 +30,19 @@ public class Account {
         this.username = username;
     }
 
-    public String getPassword() {
-        return password;
+    public String getPasscode() {
+        return passcode;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPasscode(String passcode) {
+        this.passcode = passcode;
     }
 
     @Override
     public String toString() {
         return "Account{" +
                 "username='" + username + '\'' +
-                ", password='" + password + '\'' +
+                ", passcode='" + passcode + '\'' +
                 '}';
     }
 
