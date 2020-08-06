@@ -24,6 +24,7 @@ public class MyController {
    private AccountRepository accountRepository;
 
 
+    // FIXME: 2020-08-06 Får ingen data från DBn
    //för testning
     @GetMapping("/accounts")
     public List<Account> getAllAccounts() {
@@ -31,10 +32,13 @@ public class MyController {
     }
 
 
+    // FIXME: 2020-08-06 404 error????
     @PostMapping("/login")
     public Account login(@RequestBody Map<String,String> data) throws DataNotFoundException
     {
         Account acc = accountRepository.findById(data.get("username")).orElseThrow(() -> new DataNotFoundException("Fel uppgifter"));
+
+
 
         return acc;
 
@@ -43,7 +47,7 @@ public class MyController {
     @PostMapping("/sidflesk")
     public String logout()
     {
-        return "Chupa mi verga phukr";
+        return "Ettan lös, extra god";
     }
 
     @GetMapping("/is-authenticated/{sessionId}")
