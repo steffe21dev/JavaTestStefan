@@ -20,15 +20,23 @@ import java.util.Optional;
 @RestController
 public class MyController {
 
-   @Autowired
-   private AccountRepository accountRepository;
 
+    @Autowired
+    private MyService myService;
+
+
+
+    @GetMapping("/test")
+    public void test(){
+        myService.bulkcreate();
+    }
 
     // FIXME: 2020-08-06 Får ingen data från DBn
    //för testning
     @GetMapping("/accounts")
     public List<Account> getAllAccounts() {
-        return accountRepository.findAll();
+        System.out.println(myService.findAll());
+        return myService.findAll();
     }
 
 
@@ -36,11 +44,13 @@ public class MyController {
     @PostMapping("/login")
     public Account login(@RequestBody Map<String,String> data) throws DataNotFoundException
     {
-        Account acc = accountRepository.findById(data.get("username")).orElseThrow(() -> new DataNotFoundException("Fel uppgifter"));
+        //Account acc = accountRepository.findById(data.get("username")).orElseThrow(() -> new DataNotFoundException("Fel uppgifter"));
 
 
 
-        return acc;
+        //return acc;
+
+        return null;
 
     }
 

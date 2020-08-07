@@ -1,13 +1,15 @@
 package model;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "Account")
 public class Account {
 
     @Id
-    @Column(name = "username", nullable = false)
+    @Column(name = "username")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String username;
 
     @Column(name = "passcode")
@@ -18,8 +20,18 @@ public class Account {
         this.passcode = password;
     }
 
-    public Account() {
-        super();
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Account account = (Account) o;
+        return username.equals(account.username) &&
+                passcode.equals(account.passcode);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(username, passcode);
     }
 
     public String getUsername() {
